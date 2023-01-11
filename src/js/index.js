@@ -83,9 +83,21 @@ function App(){
 //-[ ] 메뉴의 수정 버튼클릭 이벤트를 받고, 메뉴 수정하는 모달창이 뜬다.
 //-[ ] 모달창에서 신규메뉴명을 입력 받고, 확인 버튼을 누르면 메뉴가 수정된다.
 
-const updateButton = $('.menu-edit-button');
-updateButton.addEventListener('click',(e)=>{
-    console.log('ddd')
+$('#espresso-menu-list').addEventListener("click",(e)=>{
+    if(e.target.classList.contains("menu-edit-button")){
+        const $menuName = e.target.closest("li").querySelector('.menu-name');
+        const updatedMenuName = prompt(
+            "메뉴명을 수정해주세요",
+            $menuName.innerText
+            );
+            if(updatedMenuName!==null||updatedMenuName!==''){
+                console.log(updatedMenuName)
+            $menuName.innerText = updatedMenuName;
+            }else if(updatedMenuName===null||updatedMenuName===''){
+                return;
+            }
+
+     }
 });
 
 
