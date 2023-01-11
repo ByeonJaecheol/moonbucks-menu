@@ -16,7 +16,13 @@ function App(){
     })
 
 
-    const addMenuname = ()=>{
+    const addMenuName = ()=>{
+        
+        if(($('#espresso-menu-name').value === "")){
+            alert('메뉴를 입력해주세요')
+            return;
+        } 
+
         const emn = $('#espresso-menu-name').value;
         const menuItemTemplate =(emn)=> {return `
         <li class="menu-list-item d-flex items-center py-2">
@@ -47,32 +53,24 @@ function App(){
     
     $('#espresso-menu-name')
     .addEventListener('keypress',(e)=>{
-        if(e.key==='Enter' && $('#espresso-menu-name').value === ""){
-            alert('메뉴를 입력해주세요')
+      
+        if(e.key!=='Enter'){
             return;
-        } 
-        if(e.key==='Enter'){
-            addMenuname();
         }
+        addMenuName();
+       
 
     });
 
     $('#espresso-menu-submit-button')
     .addEventListener('click',(e)=>{
-        if($('#espresso-menu-name').value === ""){
-            alert('메뉴를 입력해주세요')
-            return;
-        }
-        if(===''){
-            addMenuname();
-        }
+      addMenuName();
         
     });
 
-}
 
 
-App();
+
 
 
 
@@ -85,10 +83,18 @@ App();
 //-[ ] 메뉴의 수정 버튼클릭 이벤트를 받고, 메뉴 수정하는 모달창이 뜬다.
 //-[ ] 모달창에서 신규메뉴명을 입력 받고, 확인 버튼을 누르면 메뉴가 수정된다.
 
+const updateButton = $('.menu-edit-button');
+updateButton.addEventListener('click',(e)=>{
+    console.log('ddd')
+});
+
+
 
 // TODO메뉴 삭제
 //-[ ] 메뉴 삭제 버튼 클릭 이벤트를 받고, confirm 인터페이스로 삭제 여부를 받는다.
 //-[ ] 확인 버튼을 클릭하면 메뉴가 삭제된다.
 
+}
 
 
+App();
