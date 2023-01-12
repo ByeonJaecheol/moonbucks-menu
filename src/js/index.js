@@ -9,6 +9,11 @@
 
 const $ = (selector)=> document.querySelector(selector);
 
+const UpdateMenuCount = ()=>{
+const menuCount = document.querySelectorAll('li').length;
+$('.menu-count').innerText = `총 ${menuCount}개`;
+}
+
 function App(){
     //form태그가 자동으로 전송되는걸 막는다. enter키 입력시 새로고침 현상
     $('#espresso-menu-form').addEventListener('submit',(e)=>{
@@ -43,9 +48,8 @@ function App(){
        };
        $('#espresso-menu-list').innerHTML += menuItemTemplate(emn);
        
-       
-       const menuCount = document.querySelectorAll('li').length;
-       $('.menu-count').innerText = `총 ${menuCount}개`;
+       UpdateMenuCount();
+    
        $('#espresso-menu-name').value = '';
        
     }
@@ -90,7 +94,7 @@ $('#espresso-menu-list').addEventListener("click",(e)=>{
             "메뉴명을 수정해주세요",
             $menuName.innerText
             );
-            if(updatedMenuName!==null||updatedMenuName!==''){
+            if(updatedMenuName!==null&&updatedMenuName!==''){
                 console.log(updatedMenuName)
             $menuName.innerText = updatedMenuName;
             }else if(updatedMenuName===null||updatedMenuName===''){
@@ -105,6 +109,20 @@ $('#espresso-menu-list').addEventListener("click",(e)=>{
 // TODO메뉴 삭제
 //-[ ] 메뉴 삭제 버튼 클릭 이벤트를 받고, confirm 인터페이스로 삭제 여부를 받는다.
 //-[ ] 확인 버튼을 클릭하면 메뉴가 삭제된다.
+
+$('#espresso-menu-list').addEventListener('click',(e)=>{
+  
+  if(e.target.classList.contains('menu-remove-button')){
+    
+    if(confirm('정말 삭제 하시겠습니까?')){
+    e.target.closest('li').remove();
+    
+    }
+    UpdateMenuCount();
+  }
+});
+
+
 
 }
 
